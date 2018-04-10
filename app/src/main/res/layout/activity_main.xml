@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.navionics.demo.MainActivity">
+    <fragment android:name="com.navionics.android.nms.ui.NMSMapFragment"
+        android:id="@+id/mapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    <Button
+        android:id="@+id/zoomIn"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="@dimen/btnmr"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="+" />
+    <Button
+        android:id="@+id/zoomOut"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/zoomIn"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="@dimen/btnmr"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="-" />
+    <Button
+        android:id="@+id/circle"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="@dimen/btnml"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="C" />
+    <Button
+        android:id="@+id/marker"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/circle"
+        android:layout_marginLeft="@dimen/btnml"
+        android:layout_marginTop="24dp"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="M" />
+    <Button
+        android:id="@+id/polygon"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/marker"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="@dimen/btnml"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="P" />
+    <Button
+        android:id="@+id/polyline"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/polygon"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="@dimen/btnml"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="L" />
+
+
+    <Button
+        android:id="@+id/download"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="@dimen/btnml"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="D" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="Login" />
+    />
+    <Button
+        android:id="@+id/gps"
+        android:layout_width="@dimen/btnws"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="@dimen/btnmr"
+        android:textColor="#fff"
+        android:background="@color/darker_gray"
+        android:textSize="@dimen/btnfs"
+        android:textStyle="bold"
+        android:text="G" />
+
+</RelativeLayout>

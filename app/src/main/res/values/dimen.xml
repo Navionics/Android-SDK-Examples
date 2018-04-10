@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="btnfs">24dp</dimen>
+    <dimen name="btnws">64dp</dimen>
+    <dimen name="btnml">5dp</dimen>
+    <dimen name="btnmr">5dp</dimen>
+</resources>
