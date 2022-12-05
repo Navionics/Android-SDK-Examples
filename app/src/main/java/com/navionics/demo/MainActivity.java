@@ -21,7 +21,7 @@ import com.navionics.android.nms.NMSPolygon;
 import com.navionics.android.nms.NMSPolyline;
 import com.navionics.android.nms.NMSSettings;
 import com.navionics.android.nms.NavionicsMobileServices;
-import com.navionics.android.nms.core.NSError;
+import com.navionics.android.nms.core.NMSError;
 import com.navionics.android.nms.model.CGPoint;
 import com.navionics.android.nms.model.NMSColor;
 import com.navionics.android.nms.model.NMSLocationCoordinate2D;
@@ -67,16 +67,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(NSError nsError) {
+            public void onError(NMSError nsError) {
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                 alertDialog.setTitle("Mobile SDK Initialization error");
                 alertDialog.setMessage("The mobile sdk cannot be initialized, please check the configuration");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                System.exit(0);
-                            }
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                            System.exit(0);
                         });
                 alertDialog.show();
             }
@@ -90,145 +88,116 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         zoomIn = findViewById(R.id.zoomIn);
-        zoomIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView = getMapView();
-                mapView.zoomInAnimated(true);
-            }
+        zoomIn.setOnClickListener(view -> {
+            NMSMapView mapView = getMapView();
+            mapView.zoomInAnimated(true);
         });
 
         zoomOut = findViewById(R.id.zoomOut);
-        zoomOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView = getMapView();
-                mapView.zoomOutAnimated(true);
-            }
+        zoomOut.setOnClickListener(view -> {
+            NMSMapView mapView = getMapView();
+            mapView.zoomOutAnimated(true);
         });
 
         circle = findViewById(R.id.circle);
-        circle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView = getMapView();
-                if (mCircles.size()==0) {
-                    circle.setBackgroundColor(Color.RED);
-                    addCircle(mapView);
-                } else {
-                    circle.setBackgroundColor(getResources().getColor(R.color.darker_gray));
-                    removeCircle();
-                }
+        circle.setOnClickListener(view -> {
+            NMSMapView mapView = getMapView();
+            if (mCircles.size()==0) {
+                circle.setBackgroundColor(Color.RED);
+                addCircle(mapView);
+            } else {
+                circle.setBackgroundColor(getResources().getColor(R.color.darker_gray));
+                removeCircle();
             }
         });
 
         polygon= findViewById(R.id.polygon);
-        polygon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView = getMapView();
-                if (mPolygons.size()==0) {
-                    polygon.setBackgroundColor(Color.RED);
-                    addPolygon(mapView);
-                } else {
-                    polygon.setBackgroundColor(getResources().getColor(R.color.darker_gray));
-                    removePolygon();
-                }
+        polygon.setOnClickListener(view -> {
+            NMSMapView mapView = getMapView();
+            if (mPolygons.size()==0) {
+                polygon.setBackgroundColor(Color.RED);
+                addPolygon(mapView);
+            } else {
+                polygon.setBackgroundColor(getResources().getColor(R.color.darker_gray));
+                removePolygon();
             }
         });
         polyline = findViewById(R.id.polyline);
-        polyline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView = getMapView();
-                if (mPolylines.size()==0) {
+        polyline.setOnClickListener(view -> {
+            NMSMapView mapView = getMapView();
+            if (mPolylines.size()==0) {
 
-                    polyline.setBackgroundColor(Color.RED);
-                    addPolyline(mapView);
-                } else {
-                    polyline.setBackgroundColor(getResources().getColor(R.color.darker_gray));
-                    removePolyline();
-                }
+                polyline.setBackgroundColor(Color.RED);
+                addPolyline(mapView);
+            } else {
+                polyline.setBackgroundColor(getResources().getColor(R.color.darker_gray));
+                removePolyline();
             }
         });
         marker = findViewById(R.id.marker);
-        marker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView = getMapView();
-                if (mMarkers.size()==0) {
-                    marker.setBackgroundColor(Color.RED);
-                    addMarker(mapView);
-                } else {
-                    marker.setBackgroundColor(getResources().getColor(R.color.darker_gray));
-                    removeMarker();
-                }
+        marker.setOnClickListener(view -> {
+            NMSMapView mapView = getMapView();
+            if (mMarkers.size()==0) {
+                marker.setBackgroundColor(Color.RED);
+                addMarker(mapView);
+            } else {
+                marker.setBackgroundColor(getResources().getColor(R.color.darker_gray));
+                removeMarker();
             }
         });
         login= findViewById(R.id.login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavionicsMobileServices.navionicsUser();
-            }
-        });
+        login.setOnClickListener(view -> NavionicsMobileServices.navionicsUser());
 
         download= findViewById(R.id.download);
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!downloadEnabled) {
-                    NavionicsMobileServices.enableDownloadAreaSelector();
-                    downloadEnabled=true;
-                    download.setBackgroundColor(Color.RED);
-                } else {
-                    download.setBackgroundColor(getResources().getColor(R.color.darker_gray));
-                    downloadEnabled=false;
-                    NavionicsMobileServices.disableDownloadAreaSelectorAndConfirm(true);
-                }
-
+        download.setOnClickListener(view -> {
+            if (!downloadEnabled) {
+                NavionicsMobileServices.enableDownloadAreaSelector();
+                downloadEnabled=true;
+                download.setBackgroundColor(Color.RED);
+            } else {
+                download.setBackgroundColor(getResources().getColor(R.color.darker_gray));
+                downloadEnabled=false;
+                NavionicsMobileServices.disableDownloadAreaSelectorAndConfirm(true);
             }
+
         });
         gps= findViewById(R.id.gps);
-        gps.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                NMSMapView mapView=getMapView();
-                if (!gpsEnabled) {
-                    if (NavionicsMobileServices.enableGPSServices()) {
-                        gps.setBackgroundColor(Color.RED);
-                        gpsEnabled=true;
-                    }
-                    switch (mapView.getGpsMode()) {
-                        case NMSGPSModeUnlinked:
-                        case NMSGPSModeCourseUpUnlinked: {
-                            mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeNorthUp);
-                            break;
-                        }
-                        case NMSGPSModeNorthUp:
-                        {
-                            mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeCompass);
-
-                            break;
-                        }
-                        case NMSGPSModeCompass:
-                        {
-                            mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeCourseUp);
-                            break;
-                        }
-                        case NMSGPSModeCourseUp:
-                        {
-                            mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeCourseUpUnlinked);
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-                } else {
-                    NavionicsMobileServices.disableGPSServices();
-                    gps.setBackgroundColor(Color.LTGRAY);
-                    gpsEnabled=false;
+        gps.setOnClickListener(view -> {
+            NMSMapView mapView=getMapView();
+            if (!gpsEnabled) {
+                if (NavionicsMobileServices.enableGPSServices()) {
+                    gps.setBackgroundColor(Color.RED);
+                    gpsEnabled=true;
                 }
+                switch (mapView.getGpsMode()) {
+                    case NMSGPSModeUnlinked:
+                    case NMSGPSModeCourseUpUnlinked: {
+                        mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeNorthUp);
+                        break;
+                    }
+                    case NMSGPSModeNorthUp:
+                    {
+                        mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeCompass);
+
+                        break;
+                    }
+                    case NMSGPSModeCompass:
+                    {
+                        mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeCourseUp);
+                        break;
+                    }
+                    case NMSGPSModeCourseUp:
+                    {
+                        mapView.setGpsMode(NMSEnum.NMSGPSMode.NMSGPSModeCourseUpUnlinked);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            } else {
+                NavionicsMobileServices.disableGPSServices();
+                gps.setBackgroundColor(Color.LTGRAY);
+                gpsEnabled=false;
             }
         });
         reset(savedInstanceState);
@@ -264,10 +233,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private NMSMapView getMapView(){
-        //(NMSMapView) findViewById(R.id.mapView);
         NMSMapFragment fg=(NMSMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapFragment);
         assert fg != null;
-        return fg.getMapView();//R.id.mapView);
+        return fg.getMapView();
     }
     private void addCircle(NMSMapView view){
         NMSCircle circle=NMSCircle.circleWithPosition(new NMSLocationCoordinate2D(41.814092,-70.5326246),250);

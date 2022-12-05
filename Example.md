@@ -42,7 +42,8 @@ NMSSettings settings = NMSSettings.settings();
 settings.setMode(NMSEnum.NMSFrameworkMode.NMSFrameworkModeSandbox);
 setProjectToken = ("YOUR-PROJECT-TOKEN");
 setPrivateKey("-----BEGIN RSA PRIVATE KEY-----\nYOUR\nPRIVATE\nKEY\n-----END RSA PRIVATE KEY-----\n");
-NSError error = new NSError();
+setConfigurationToken("YOUR-CONFIGURATION-TOKEN");
+NMSError error = new NMSError();
 NavionicsMobileServices.initializeWithSettings(settings, error);
 ```
 Note that your private key will have the following format:
